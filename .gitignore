@@ -1,0 +1,7 @@
+build/
+cmake-build-*/
+.idea/
+*.bin
+perf.data*
+*.svg
+profile.txt

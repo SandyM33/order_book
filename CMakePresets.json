@@ -1,0 +1,84 @@
+{
+  "version": 3,
+  "configurePresets": [
+    {
+      "name": "release",
+      "displayName": "Release (-O2 -march=native)",
+      "binaryDir": "${sourceDir}/build/release",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Release"
+      }
+    },
+    {
+      "name": "relwithdebinfo",
+      "displayName": "Release + symbols/frame pointers (for perf)",
+      "binaryDir": "${sourceDir}/build/relwithdebinfo",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "RelWithDebInfo"
+      }
+    },
+    {
+      "name": "debug",
+      "displayName": "Debug + ASan/UBSan",
+      "binaryDir": "${sourceDir}/build/debug",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Debug",
+        "OB_SANITIZE": "ON",
+        "OB_WERROR": "ON"
+      }
+    },
+    {
+      "name": "tsan",
+      "displayName": "Debug + ThreadSanitizer",
+      "binaryDir": "${sourceDir}/build/tsan",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Debug",
+        "OB_SANITIZE": "OFF",
+        "OB_TSAN": "ON",
+        "OB_WERROR": "ON",
+        "OB_BUILD_BENCH": "OFF"
+      }
+    }
+  ],
+  "buildPresets": [
+    {
+      "name": "release",
+      "configurePreset": "release"
+    },
+    {
+      "name": "relwithdebinfo",
+      "configurePreset": "relwithdebinfo"
+    },
+    {
+      "name": "debug",
+      "configurePreset": "debug"
+    },
+    {
+      "name": "tsan",
+      "configurePreset": "tsan"
+    }
+  ],
+  "testPresets": [
+    {
+      "name": "release",
+      "configurePreset": "release",
+      "output": {
+        "outputOnFailure": true
+      }
+    },
+    {
+      "name": "debug",
+      "configurePreset": "debug",
+      "output": {
+        "outputOnFailure": true
+      }
+    },
+    {
+      "name": "tsan",
+      "configurePreset": "tsan",
+      "output": {
+        "outputOnFailure": true
+      }
+    }
+  ]
+}
